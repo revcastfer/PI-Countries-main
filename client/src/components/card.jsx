@@ -1,12 +1,14 @@
 
 
 
-export default function Card(flag,name,continent){
+export default function Card(props){
+
 	return(
 		<div>
-			<img src={flag}  alt={`bandera de ${name}`}/>
-			<span>{name}</span>
-			<span>{continent}</span>
+	        
+			<img src={props.flag}  alt={`bandera de ${props.name}`}/>
+			<span>{props.name}</span>
+			<span>{props.continent}</span>
 		</div>
 
 

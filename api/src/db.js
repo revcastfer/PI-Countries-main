@@ -41,11 +41,10 @@ Activity.belongsToMany(Country, { through: "activityCountry" });
 async function getDataApi() {
   try {
     let response = await axios.get('https://restcountries.com/v3/all');
-    let dataforBulk=[];
-    
+   
+    let dataforBulk=[];   
 
     response.data.forEach(countryApi=>{
-
 
       dataforBulk.push({ ID:countryApi.cca3,
                          name:countryApi.name.common,
@@ -56,6 +55,7 @@ async function getDataApi() {
                          area:countryApi.area,
                         population:countryApi.population})});
 await Country.bulkCreate(dataforBulk)}
+
 catch (error) {console.error(error)}
 }
 
