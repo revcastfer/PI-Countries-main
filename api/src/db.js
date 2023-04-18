@@ -41,6 +41,7 @@ Activity.belongsToMany(Country, { through: "activityCountry" });
 async function getDataApi() {
   try {
     let response = await axios.get('https://restcountries.com/v3/all');
+
    
     let dataforBulk=[];   
 

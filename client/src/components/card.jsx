@@ -1,15 +1,21 @@
-
+import styled from 'styled-components'
 
 
 export default function Card(props){
 
+
+const SpanCard=styled.div`
+
+`
+
+
+
 	return(
-		<div>
-	        
+		<div>	       
 			<img src={props.flag}  alt={`bandera de ${props.name}`}/>
-			<span>{props.name}</span>
-			<span>{props.continent}</span>
-		</div>
+			<SpanCard>{props.name}</SpanCard>
+			<SpanCard>{props.continent}</SpanCard>
+		</div> 
 
 
 		)

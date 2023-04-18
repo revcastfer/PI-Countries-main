@@ -1,7 +1,9 @@
 import axios from 'axios';
 import Cards from './cards.jsx'
 import {useState,useEffect} from 'react'
-
+import styled from 'styled-components';
+import fondoHome from '../imgs/marvillas.png'
+import Navbar from './navbar.jsx'
 
 export default function  Home(){
 
@@ -28,16 +30,21 @@ useEffect(()=>{
        
 
 
+const HomeDiv=styled.div`
+background-image: url(${fondoHome});
 
+`
 
  
 
 
-return( <div>
+return( <HomeDiv>
+
+	<Navbar/>
 	 {data?<Cards data={displayCountry()} pageCount={pageCount} changePage={changePage} />:<h1>cargando</h1>}
 	 
        
-	</div> )
+	</HomeDiv> )
 
 
 }
