@@ -4,47 +4,48 @@ import {useState,useEffect} from 'react'
 import styled from 'styled-components';
 import fondoHome from '../imgs/marvillas.png'
 import Navbar from './navbar.jsx'
+import { useDispatch,useSelector } from 'react-redux'
+import {getData} from '../redux/actions.js'
 
 export default function  Home(){
-
+	const dispatch = useDispatch();
 	const [data,setData]=useState(null);
 	const [pageNumber,setPageNumber]=useState(0);
-	const [pageCount,setPageCount]=useState(0);
+	const [pageCount,setPageCount]=useState(26);
+    
 
+
+
+
+   dispatch(getData());
+
+  let countries=useSelector(state=>state.countries);
 	const countryPerPage=10;
 	const pagesVisited=pageNumber*countryPerPage;
-
-	let displayCountry=()=>{return data.slice(pagesVisited,pagesVisited+countryPerPage)};
+    let displayCountry=()=>{return data.slice(pagesVisited,pagesVisited+countryPerPage)};
 	let changePage=({selected})=>{setPageNumber(selected)};
-	
+
+ useEffect(()=>{  
+
+setData(countries);
+setPageCount(Math.ceil(countries.length / countryPerPage));
+
+
+ },[countries])
 
 
 
-useEffect(()=>{
-  axios('http://localhost:3001/countries')
-        .then(dataAxios=>dataAxios.data)
-        .then(dataApi=>{setPageCount(Math.ceil(dataApi.length / countryPerPage));setData(dataApi);})
 
-
-;},[]);
-       
-
-
-const HomeDiv=styled.div`
-background-image: url(${fondoHome});
-
-`
 
  
 
 
-return( <HomeDiv>
+return( <div>
 
-	<Navbar/>
-	 {data?<Cards data={displayCountry()} pageCount={pageCount} changePage={changePage} />:<h1>cargando</h1>}
+	{data?<Cards data={displayCountry()} pageCount={pageCount} changePage={changePage}/>:<div> cargando</div>}
 	 
        
-	</HomeDiv> )
+	</div> )
 
 
 }

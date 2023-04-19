@@ -9,13 +9,12 @@ import "./pagination.css"
 
 
 export default function Cards(props){
-	
+	console.log(props)
 
-	return(<div>
+return(
+
+<div>
 {props.data.map(pais=><Card key={pais.ID} flag={pais.flag} name={pais.name} continent={pais.continent}/>  )}
-
-
-
 <ReactPaginate
         previousLabel={"Previous"}
         nextLabel={"Next"}
