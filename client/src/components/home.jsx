@@ -8,41 +8,25 @@ import { useDispatch,useSelector } from 'react-redux'
 import {getData} from '../redux/actions.js'
 
 export default function  Home(){
-	const dispatch = useDispatch();
-	const [data,setData]=useState(null);
-	const [pageNumber,setPageNumber]=useState(0);
-	const [pageCount,setPageCount]=useState(26);
-    
+const dispatch = useDispatch();
+const [pageNumber,setPageNumber]=useState(0);
+let countries=useSelector(state=>state.countries);
+let countryPerPage=10;
+let pagesVisited=pageNumber*10;
+
+ useEffect(()=>{ 
+  dispatch(getData())
+ },[]);
 
 
-
-
-   dispatch(getData());
-
-  let countries=useSelector(state=>state.countries);
-	const countryPerPage=10;
-	const pagesVisited=pageNumber*countryPerPage;
-    let displayCountry=()=>{return data.slice(pagesVisited,pagesVisited+countryPerPage)};
-	let changePage=({selected})=>{setPageNumber(selected)};
-
- useEffect(()=>{  
-
-setData(countries);
-setPageCount(Math.ceil(countries.length / countryPerPage));
-
-
- },[countries])
-
-
-
-
-
- 
+let displayCountry=()=>{return countries.slice(pagesVisited,pagesVisited+countryPerPage)};
+let changePage=({selected})=>{setPageNumber(selected)};
 
 
 return( <div>
+	<Navbar/>
 
-	{data?<Cards data={displayCountry()} pageCount={pageCount} changePage={changePage}/>:<div> cargando</div>}
+	{countries?<Cards data={displayCountry()}  changePage={changePage}/>:<div> cargando</div>}
 	 
        
 	</div> )

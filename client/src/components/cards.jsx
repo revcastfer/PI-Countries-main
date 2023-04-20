@@ -2,14 +2,19 @@ import Card from './card.jsx'
 import ReactPaginate from "react-paginate";
 import styled from 'styled-components';
 import "./pagination.css"
-
+import { useDispatch,useSelector } from 'react-redux'
 
 
 
 
 
 export default function Cards(props){
-	console.log(props)
+let countries=useSelector(state=>state.countries);	
+const countryPerPage=10;
+let pageCount= Math.ceil(countries.length / countryPerPage);
+        
+
+
 
 return(
 
@@ -18,7 +23,7 @@ return(
 <ReactPaginate
         previousLabel={"Previous"}
         nextLabel={"Next"}
-        pageCount={props.pageCount}
+        pageCount={pageCount}
         onPageChange={props.changePage}
         containerClassName={"paginationBttns"}
         previousLinkClassName={"previousBttn"}
