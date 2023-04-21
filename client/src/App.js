@@ -1,21 +1,21 @@
 import Home from'./components/home.jsx';
+import Navbar from'./components/navbar.jsx';
 import FormActivities from './components/formActivities.jsx';
 import './App.css';
-import { Switch, Route, Routes } from "react-router-dom";
+import {  Routes,Route,useparams } from "react-router-dom";
 
 function App() {
   return (
     <div className="App">
 
-    <Router>
-   <Switch>
-       < Route path="/home" element={<Home/>}/>
-      <Route path="/activities" element={<FormActivities/>}/>
-    </Switch>
- </Router>
-     
+   <Routes>
+   <Route path="/" element={<Navbar/>}>
+       <Route path="Home" element={<Home/>} />
+       <Route path="activities" element={<FormActivities/>} />   
+   </Route>
+    </Routes> 
     </div>
-  );
+  )
 }
 
 export default App;

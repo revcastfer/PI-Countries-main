@@ -15,16 +15,17 @@ let countryPerPage=10;
 let pagesVisited=pageNumber*10;
 
  useEffect(()=>{ 
-  dispatch(getData())
+  dispatch(getData());
+  
  },[]);
 
-
+console.log("entra");
 let displayCountry=()=>{return countries.slice(pagesVisited,pagesVisited+countryPerPage)};
 let changePage=({selected})=>{setPageNumber(selected)};
 
 
 return( <div>
-	<Navbar/>
+	
 
 	{countries?<Cards data={displayCountry()}  changePage={changePage}/>:<div> cargando</div>}
 	 
