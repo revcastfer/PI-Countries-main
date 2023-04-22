@@ -19,7 +19,7 @@ let pagesVisited=pageNumber*10;
   
  },[]);
 
-console.log("entra");
+
 let displayCountry=()=>{return countries.slice(pagesVisited,pagesVisited+countryPerPage)};
 let changePage=({selected})=>{setPageNumber(selected)};
 

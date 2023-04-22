@@ -19,7 +19,7 @@ let pageCount= Math.ceil(countries.length / countryPerPage);
 return(
 
 <div>
-{props.data.map(pais=><Card key={pais.ID} flag={pais.flag} name={pais.name} continent={pais.continent}/>  )}
+{props.data.map(pais=><Card key={pais.ID} ID={pais.ID} flag={pais.flag} name={pais.name} continent={pais.continent}/>  )}
 <ReactPaginate
         previousLabel={"Previous"}
         nextLabel={"Next"}
