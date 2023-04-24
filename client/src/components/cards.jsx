@@ -9,17 +9,18 @@ import { useDispatch,useSelector } from 'react-redux'
 
 
 export default function Cards(props){
-let countries=useSelector(state=>state.countries);	
-const countryPerPage=10;
+let countries=props.countries;	
+
+let countryPerPage=10;
 let pageCount= Math.ceil(countries.length / countryPerPage);
-        
+let pagesVisited=props.pageNumber*10;        
 
-
+let displayCountry =countries.slice (pagesVisited,pagesVisited+countryPerPage)
 
 return(
 
 <div>
-{props.data.map(pais=><Card key={pais.ID} ID={pais.ID} flag={pais.flag} name={pais.name} continent={pais.continent}/>  )}
+{displayCountry.map(pais=><Card key={pais.ID} ID={pais.ID} flag={pais.flag} name={pais.name} continent={pais.continent}/>  )}
 <ReactPaginate
         previousLabel={"Previous"}
         nextLabel={"Next"}
