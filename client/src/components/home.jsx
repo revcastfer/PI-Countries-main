@@ -6,46 +6,41 @@ import fondoHome from '../imgs/marvillas.png'
 import Navbar from './navbar.jsx'
 import { useDispatch,useSelector } from 'react-redux'
 import {getData} from '../redux/actions.js'
-import Combobox from "react-widgets/Combobox";
-import "react-widgets/styles.css";
+import{ useNavigate } from "react-router-dom";
 
 
 
 
 
-
-export default function  Home(){
+export default function  Home(){	
+let[countries,setCountries]=useState([])	
+const navigate = useNavigate();
 const dispatch = useDispatch();
+
 const [pageNumber,setPageNumber]=useState(0);
-const [continents,setContinents]=useState([]);
-let countries=useSelector(state=>state.countries);
+let islogin=useSelector(state=>state.islogin);
+if(!islogin) {navigate("/")};
 
-
- useEffect(()=>{ 
-  dispatch(getData());
- 
-let continent=[];
-countries.map(country=>!continent.includes(country.continent)?continent.push(country.continent):null   );
-setContinents(continent);
-
-
- },[]);
-
-
+let data=useSelector(state=>state.countries);
 
 let changePage=({selected})=>{setPageNumber(selected)};
 
+useEffect(()=>{
+
+
+setCountries(data)
+
+},[data] )
+
+
+
+
 
 return( <div>
-	<button>A-Z</button>
-    <button>Z-A</button>
+	
 
-{continents?<Combobox data={ continents} 
-placeholder="Search for a continent" />:null}
-
-<Combobox  data={[ ]}  placeholder="Search for a type of activity" />
-
-	{countries?<Cards countries={countries} pageNumber={pageNumber} changePage={changePage}/>:<div> cargando</div>}
+   {countries?<Navbar countries={countries} />:<div> cargando</div>}
+	{countries?<Cards countries={countries} pageNumber={pageNumber} changePage={changePage}  setCountries={setCountries}/>:<div> cargando</div>}
 	 
        
 	</div> )

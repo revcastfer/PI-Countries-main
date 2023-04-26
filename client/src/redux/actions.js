@@ -9,3 +9,15 @@ export function getData(){
     }
 }
 
+export function login(){
+      return{type:"LOGIN"}};
+
+export function logout(){
+      return{type:"LOGOUT"}}
+
+
+export function a_to_z(){
+      return{type:'A_Z'}}
+
+export function z_to_a(){
+      return{type:'Z_A'}}

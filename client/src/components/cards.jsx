@@ -13,9 +13,9 @@ let countries=props.countries;
 
 let countryPerPage=10;
 let pageCount= Math.ceil(countries.length / countryPerPage);
-let pagesVisited=props.pageNumber*10;        
+let pagesVisited=props.pageNumber*countryPerPage;        
 
-let displayCountry =countries.slice (pagesVisited,pagesVisited+countryPerPage)
+let displayCountry =countries.slice(pagesVisited,pagesVisited+countryPerPage)
 
 return(
 
