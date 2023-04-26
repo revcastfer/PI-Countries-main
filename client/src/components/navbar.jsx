@@ -12,6 +12,7 @@ export default function Navbar(props){
 const dispatch = useDispatch();
 const navigate = useNavigate();
 
+const countries=useSelector(state=>state.countries);
 let islogin=useSelector(state=>state.islogin);
 const [continents,setContinents]=useState([]);
 
@@ -26,10 +27,9 @@ function logoutNav(){dispatch(logout());navigate("/") };
 
 
  useEffect(()=>{ 
-  console.log(props);
  let continent=[];
-props.countries.map(country=>!continent.includes(country.continent)?continent.push(country.continent):null   );
-setContinents(continent)},[])
+countries.map(country=>!continent.includes(country.continent)?continent.push(country.continent):null   );
+setContinents(continent)},[countries])
 
 
 	return (<div>

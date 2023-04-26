@@ -21,14 +21,14 @@ let [countriesSelected,setCountriesSelected]=useState([]);
 
 let names=[];
 countries.map(country=>names.push(country.name));
-console.log(countries);
 
 
 
-let dataA= countries.sort((x, y) => x.name.localeCompare(y.name));
+
+
 
 let valuesCombo=[];
-dataA.map(country=>valuesCombo.push({ value: country.name, label: country.name, color: '#00B8D9', isFixed: true }) )
+countries.map(country=>valuesCombo.push({ value: country.name, label: country.name, color: '#00B8D9', isFixed: true }) )
 
 
 

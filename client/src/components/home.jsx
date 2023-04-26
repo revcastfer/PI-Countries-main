@@ -13,7 +13,8 @@ import{ useNavigate } from "react-router-dom";
 
 
 export default function  Home(){	
-let[countries,setCountries]=useState([])	
+let data=useSelector(state=>state.countries);
+let[countries,setCountries]=useState([]);	
 const navigate = useNavigate();
 const dispatch = useDispatch();
 
@@ -21,13 +22,13 @@ const [pageNumber,setPageNumber]=useState(0);
 let islogin=useSelector(state=>state.islogin);
 if(!islogin) {navigate("/")};
 
-let data=useSelector(state=>state.countries);
+
+console.log(data);
 
 let changePage=({selected})=>{setPageNumber(selected)};
 
 useEffect(()=>{
-
-
+console.log("render");
 setCountries(data)
 
 },[data] )

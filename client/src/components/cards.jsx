@@ -3,7 +3,7 @@ import ReactPaginate from "react-paginate";
 import styled from 'styled-components';
 import "./pagination.css"
 import { useDispatch,useSelector } from 'react-redux'
-
+import {useState,useEffect} from 'react'
 
 
 
@@ -15,7 +15,9 @@ let countryPerPage=10;
 let pageCount= Math.ceil(countries.length / countryPerPage);
 let pagesVisited=props.pageNumber*countryPerPage;        
 
-let displayCountry =countries.slice(pagesVisited,pagesVisited+countryPerPage)
+let displayCountry =countries.slice(pagesVisited,pagesVisited+countryPerPage);
+
+
 
 return(
 
