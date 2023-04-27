@@ -23,7 +23,16 @@ let islogin=useSelector(state=>state.islogin);
 if(!islogin) {navigate("/")};
 
 
-console.log(data);
+
+
+let onSearch=(e)=>{
+console.log(e.target.value);
+let filter=[]
+data.map(countryFilter=>countryFilter.name.toLowerCase().includes(e.target.value.toLowerCase())?filter.push(countryFilter):null);
+console.log(filter);
+	setCountries(filter)
+};
+
 
 let changePage=({selected})=>{setPageNumber(selected)};
 
@@ -39,9 +48,8 @@ setCountries(data)
 
 return( <div>
 	
-
-   {countries?<Navbar countries={countries} />:<div> cargando</div>}
-	{countries?<Cards countries={countries} pageNumber={pageNumber} changePage={changePage}  setCountries={setCountries}/>:<div> cargando</div>}
+    <Navbar countries={countries} onSearch={onSearch} />
+	<Cards countries={countries} pageNumber={pageNumber} changePage={changePage}  setCountries={setCountries}/>
 	 
        
 	</div> )

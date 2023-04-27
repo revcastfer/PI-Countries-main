@@ -1,7 +1,7 @@
 
 
 
-export default function SearchBar(){
+export default function SearchBar(props){
 
 
 
@@ -12,7 +12,7 @@ export default function SearchBar(){
 return(<div>
 
 <label>search</label> 
-<input type="text" />
+<input   onChange={props.onSearch} type="text" />
 
 
 </div>	)	

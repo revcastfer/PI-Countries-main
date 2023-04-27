@@ -15,6 +15,7 @@ const navigate = useNavigate();
 const countries=useSelector(state=>state.countries);
 let islogin=useSelector(state=>state.islogin);
 const [continents,setContinents]=useState([]);
+const [valueContinent,setValueContinent]=useState([]);
 
 const navLogin={display:islogin?"block":"none"}
 const Login={display:islogin?"none":"block"}
@@ -23,8 +24,7 @@ const Login={display:islogin?"none":"block"}
 function logoutNav(){dispatch(logout());navigate("/") };
 
 
-
-
+console.log(valueContinent);
 
  useEffect(()=>{ 
  let continent=[];
@@ -34,10 +34,10 @@ setContinents(continent)},[countries])
 
 	return (<div>
 
-{continents?<Combobox data={ continents} placeholder="Search for a continent" />:null}
+{continents?<Combobox data={ continents} onChange={value => setValueContinent(value)} placeholder="Search for a continent" />:null}
 <Combobox  data={[ ]}  placeholder="Search for a type of activity" />
 
-<Searchbar />
+<Searchbar onSearch={props.onSearch} />
 <NavLink to="/activities" >activities</NavLink>
 
 

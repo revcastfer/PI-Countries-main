@@ -1,4 +1,4 @@
-const initialState={countries:[] , islogin: false,countriesFilter:[] };
+const initialState={countries:[] , islogin: false };
 
 
 const countriesReducer=(state=initialState,action)=>{
