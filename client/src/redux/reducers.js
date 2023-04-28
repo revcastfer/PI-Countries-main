@@ -1,4 +1,4 @@
-const initialState={countries:[] , islogin: false,countriesFilter:[] };
+const initialState={countries:[] , islogin: false,countriesFilter:[],continent:"all",page:1 };
 
 
 const countriesReducer=(state=initialState,action)=>{
@@ -13,7 +13,7 @@ const countriesReducer=(state=initialState,action)=>{
 	case 'LOGOUT':
 		return {...state,islogin:false}
 
-   case 'A_Z':
+    case 'A_Z':
    	let dataA= state.countries.sort((x, y) => x.name.localeCompare(y.name))
 		return {...state,countriesFilter:dataA}
 
@@ -23,6 +23,12 @@ const countriesReducer=(state=initialState,action)=>{
 
 	case 'SET_DATA_FILTER':
 		return {...state,countriesFilter:action.payload}
+
+	case 'SET_CONTINENT':
+		return {...state,continent:action.payload}
+
+	case 'SET_PAGE':
+		return {...state,page:action.payload}
 
 	default: 
 		return {...state}

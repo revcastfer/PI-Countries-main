@@ -18,6 +18,9 @@ export function logout(){
 export function setDataFilter(value){
       return{type:"SET_DATA_FILTER", payload:value}};
 
+export function setPageNumber(value){
+      return{type:"SET_PAGE", payload:value}};
+
 export function a_to_z(){
       return{type:'A_Z'}};
 

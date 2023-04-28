@@ -18,24 +18,12 @@ let countries=useSelector(state=>state.countriesFilter);
 const navigate = useNavigate();
 const dispatch = useDispatch();
 
-const [pageNumber,setPageNumber]=useState(0);
 let islogin=useSelector(state=>state.islogin);
 
 
 
-
-
-
-
-
-
-
-let changePage=({selected})=>{setPageNumber(selected)};
-
 useEffect(()=>{
-if(!islogin) {navigate("/")};
-console.log("render");
-
+	if(!islogin) {navigate("/")}
 },[countries] )
 
 
@@ -45,7 +33,7 @@ console.log("render");
 return( <div>
 	
 
-	<Cards countries={countries} pageNumber={pageNumber} changePage={changePage}  s/>
+	<Cards countries={countries} />
 	 
        
 	</div> )
