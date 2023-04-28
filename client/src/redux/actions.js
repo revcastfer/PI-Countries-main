@@ -15,6 +15,8 @@ export function login(){
 export function logout(){
       return{type:"LOGOUT"}};
 
+export function setDataFilter(value){
+      return{type:"SET_DATA_FILTER", payload:value}};
 
 export function a_to_z(){
       return{type:'A_Z'}};

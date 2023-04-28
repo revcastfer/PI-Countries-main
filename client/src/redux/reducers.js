@@ -1,11 +1,11 @@
-const initialState={countries:[] , islogin: false };
+const initialState={countries:[] , islogin: false,countriesFilter:[] };
 
 
 const countriesReducer=(state=initialState,action)=>{
 
 	switch(action.type){
 	case 'RECIVE_DATA':
-		return {...state,countries:action.payload}
+		return {...state,countries:action.payload,countriesFilter:action.payload}
 
 	case 'LOGIN':
 		return {...state,islogin:true}
@@ -15,11 +15,14 @@ const countriesReducer=(state=initialState,action)=>{
 
    case 'A_Z':
    	let dataA= state.countries.sort((x, y) => x.name.localeCompare(y.name))
-		return {...state,countries:dataA}
+		return {...state,countriesFilter:dataA}
 
 	case 'Z_A':
 	let dataZ= state.countries.sort((x, y) => y.name.localeCompare(x.name))
-		return {...state,countries:dataZ}
+		return {...state,countriesFilter:dataZ}
+
+	case 'SET_DATA_FILTER':
+		return {...state,countriesFilter:action.payload}
 
 	default: 
 		return {...state}

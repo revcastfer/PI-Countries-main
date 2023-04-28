@@ -12,11 +12,11 @@ let islogin=useSelector(state=>state.islogin);
 const dispatch = useDispatch();
 const navigate = useNavigate();
 
-function loginNav(){dispatch(login());navigate("/Home") };
+function loginNav(){dispatch(login());navigate("/Home/countries") };
 
 
 useEffect(()=>{
-if(islogin){navigate("/Home")}
+if(islogin){navigate("/Home/countries")}
 
 },[])
 	return(

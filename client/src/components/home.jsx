@@ -13,34 +13,30 @@ import{ useNavigate } from "react-router-dom";
 
 
 export default function  Home(){	
-let data=useSelector(state=>state.countries);
-let[countries,setCountries]=useState([]);	
+let countries=useSelector(state=>state.countriesFilter);
+	
 const navigate = useNavigate();
 const dispatch = useDispatch();
 
 const [pageNumber,setPageNumber]=useState(0);
 let islogin=useSelector(state=>state.islogin);
-if(!islogin) {navigate("/")};
 
 
 
 
-let onSearch=(e)=>{
-console.log(e.target.value);
-let filter=[]
-data.map(countryFilter=>countryFilter.name.toLowerCase().includes(e.target.value.toLowerCase())?filter.push(countryFilter):null);
-console.log(filter);
-	setCountries(filter)
-};
+
+
+
+
 
 
 let changePage=({selected})=>{setPageNumber(selected)};
 
 useEffect(()=>{
+if(!islogin) {navigate("/")};
 console.log("render");
-setCountries(data)
 
-},[data] )
+},[countries] )
 
 
 
@@ -48,8 +44,8 @@ setCountries(data)
 
 return( <div>
 	
-    <Navbar countries={countries} onSearch={onSearch} />
-	<Cards countries={countries} pageNumber={pageNumber} changePage={changePage}  setCountries={setCountries}/>
+
+	<Cards countries={countries} pageNumber={pageNumber} changePage={changePage}  s/>
 	 
        
 	</div> )
