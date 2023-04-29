@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { useDispatch,useSelector } from 'react-redux'
 import { NavLink,Outlet, useNavigate } from "react-router-dom";
-import {login,logout,a_to_z,z_to_a,setDataFilter} from '../redux/actions.js'
+import {login,logout,a_to_z,z_to_a,setDataFilter,setPageNumber} from '../redux/actions.js'
 import Searchbar from './searchBar.jsx'
 import {useState,useEffect} from 'react'
 import Combobox from "react-widgets/Combobox";
@@ -26,6 +26,7 @@ const Login={display:islogin?"none":"block"}
 function logoutNav(){dispatch(logout());navigate("/") };
 
 let continentFilter=(value)=>{
+  dispatch(setPageNumber(0));
     console.log(value);
     if(value=="All continents")
         {dispatch(setDataFilter(countries))}
@@ -41,16 +42,16 @@ let continentFilter=(value)=>{
     let continent=[];
     countries.map(country=>!continent.includes(country.continent)?continent.push(country.continent):null   );
     setContinents(continent)},
-[countries])
+[countries,])
 
 let orden=(orden)=>{  
 switch(orden){
 
-    case "a_to_z":
+    case "a-z":
         dispatch(a_to_z())
         break
 
-    case "z_to_a":
+    case "z-a":
         dispatch(z_to_a())
         break
 
@@ -65,14 +66,13 @@ default: console.log("orden")}
 
 	return (<div>
 
-{continents?<Combobox data={ [...continents,"All continents"]} onChange={value =>continentFilter(value)} placeholder="Search for a continent" />:null}
-
+<Combobox data={ [...continents,"All continents"]} onChange={value =>continentFilter(value)} placeholder="Search for a continent" />
+<Combobox data={ ["a-z","z-a"]} onChange={value =>orden(value)} placeholder="Search for order" />
 
 <Combobox  data={[ ]}  placeholder="Search for a type of activity" />
 <Searchbar />
 <NavLink to="/activities" >activities</NavLink>
-<button onClick={()=>{orden("a_to_z")}} >A-Z</button>
-<button onClick={()=>{orden("z_to_a")}} >Z-A</button>
+
 <span  onClick={ ()=>{logoutNav()} }> Logout </span>
 <Outlet/>
 

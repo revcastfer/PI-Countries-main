@@ -8,6 +8,8 @@ import{ useNavigate,NavLink } from "react-router-dom";
 
 
 export default function FormActivities(){
+
+const selectPaises={width:"350px"} ;   
 const navigate = useNavigate();
 let islogin=useSelector(state=>state.islogin);
 
@@ -34,18 +36,43 @@ countries.map(country=>valuesCombo.push({ value: country.name, label: country.na
 
 	return(
 <form>
-<label>nombre</label> <input type="text"/>
+<div><label>nombre :</label> <input type="text"/></div>
+<div><label>dificultad :</label> 
+<select name="dificultad" id="dificultad">
+  <option value="" readonly hidden>escoja la dificultad</option>
+  <option value="1">1</option>
+  <option value="2">2</option>
+  <option value="3">3</option>
+  <option value="4">4</option>
+</select>  
+</div>
 
-<label>dificultad</label> <input type="text"/>
-<label>duracion</label>  <input type="time" />
-<label>temporada</label>  <input type="text" />
-<Select
-    
-    isMulti
-    name="countries"
-    options={valuesCombo }   className="basic-multi-select"
-    classNamePrefix="select"
-  />
+<div><label>duracion :</label><input type="time" /></div>
+<div>
+<label>temporada : </label>  
+<select name="temporada" id="temporada">
+ <option value="" readonly hidden>escoja la la estacion</option>
+  <option value="Verano">Verano</option>
+  <option value="Otoño" >Otoño</option>
+  <option value="Invierno">Invierno</option>
+  <option value="Primavera">Primavera</option>
+</select>
+</div>
+
+<div>
+<select  name="pais" id="pais">
+ <option value="" readonly hidden>escoja sus paises</option>
+{countries.map(ele=><option name={ele.name} value={ele.name}>{ele.name}</option> )}
+</select>
+
+</div>
+
+
+
+
+
+
+
 
 
 <NavLink  to="/Home" ><button>back to Home</button></NavLink>

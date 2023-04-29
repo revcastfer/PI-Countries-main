@@ -34,7 +34,9 @@ return(
         previousLinkClassName={"previousBttn"}
         nextLinkClassName={"nextBttn"}
         disabledClassName={"paginationDisabled"}
-        activeClassName={"paginationActive"}/>
+        activeClassName={"paginationActive"}
+        
+        />
 		
 
 </div>)

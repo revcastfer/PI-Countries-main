@@ -1,4 +1,4 @@
-const initialState={countries:[] , islogin: false,countriesFilter:[],continent:"all",page:1 };
+const initialState={countries:[] , islogin: false,countriesFilter:[],continent:"all",page:0 };
 
 
 const countriesReducer=(state=initialState,action)=>{
