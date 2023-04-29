@@ -9,33 +9,36 @@ import{ useNavigate,NavLink } from "react-router-dom";
 
 export default function FormActivities(){
 
+
 const selectPaises={width:"350px"} ;   
 const navigate = useNavigate();
+
 let islogin=useSelector(state=>state.islogin);
-
-useEffect(()=>{if(!islogin) {navigate("/")}},[])
-
-
 let countries=useSelector(state=>state.countries);
 let [namesCountries,setNamecountries]=useState([]);
 let [countriesSelected,setCountriesSelected]=useState([]);
-
 
 let names=[];
 countries.map(country=>names.push(country.name));
 
 
+let handleSubmit=(e)=>{
+e.preventDefault();
 
 
+}
 
 
-let valuesCombo=[];
-countries.map(country=>valuesCombo.push({ value: country.name, label: country.name, color: '#00B8D9', isFixed: true }) )
+let countryAdd=(e)=>{
+setCountriesSelected([...countriesSelected,e.target.value]);
+console.log(countriesSelected)
+};
 
-
+useEffect(()=>{if(!islogin) {navigate("/")}},[countriesSelected])
 
 	return(
-<form>
+<div>    
+<form onSubmit={handleSubmit}>
 <div><label>nombre :</label> <input type="text"/></div>
 <div><label>dificultad :</label> 
 <select name="dificultad" id="dificultad">
@@ -60,23 +63,18 @@ countries.map(country=>valuesCombo.push({ value: country.name, label: country.na
 </div>
 
 <div>
-<select  name="pais" id="pais">
+<select  name="pais" id="pais" onChange={countryAdd}>
  <option value="" readonly hidden>escoja sus paises</option>
 {countries.map(ele=><option name={ele.name} value={ele.name}>{ele.name}</option> )}
 </select>
 
 </div>
-
-
-
-
-
-
-
-
+<button>create</button>
+</form>
 
 <NavLink  to="/Home" ><button>back to Home</button></NavLink>
-<button>create</button>
 
-</form>)
+{countriesSelected.map(ele=><div></div>)}
+
+</div>)
 }
