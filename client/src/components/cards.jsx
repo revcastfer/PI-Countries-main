@@ -19,12 +19,21 @@ let pagesVisited=pageNumber*countryPerPage;
 
 let displayCountry =countries.slice(pagesVisited,pagesVisited+countryPerPage);
 
+let CardsContainer=styled.div`
+display: flex;
+flex-wrap:wrap;
+justify-content: space-around;
+align-content: space-around;
+
+
+` 
 
 
 return(
-
-<div>
+<div >
+<CardsContainer>
 {displayCountry.map(pais=><Card key={pais.ID} ID={pais.ID} flag={pais.flag} name={pais.name} continent={pais.continent}/>  )}
+</CardsContainer>
 <ReactPaginate
         previousLabel={"Previous"}
         nextLabel={"Next"}
@@ -34,10 +43,8 @@ return(
         previousLinkClassName={"previousBttn"}
         nextLinkClassName={"nextBttn"}
         disabledClassName={"paginationDisabled"}
-        activeClassName={"paginationActive"}
-        
+        activeClassName={"paginationActive"}        
         />
-		
 
 </div>)
 }

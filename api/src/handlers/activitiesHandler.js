@@ -3,11 +3,11 @@
  const postActivityHandler=async(req,res)=>{
  
 let {nombre,dificultad,duracion,temporada,paises}=req.body;
-
-
-try{await postActivityController(nombre,dificultad,duracion,temporada,paises);
+try{
+ await postActivityController(nombre,dificultad,duracion,temporada,paises);
 res.status(200).json(nombre,dificultad,duracion,temporada,paises) }
 catch(error){res.status(500).send(error)}
+
  };
 
 

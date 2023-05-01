@@ -1,5 +1,10 @@
 .App {
   text-align: center;
+  background-image: url("./imgs/maravillas.png");
+background-size:cover;
+background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
 }
 
 .App-logo {

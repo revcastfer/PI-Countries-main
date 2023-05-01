@@ -2,11 +2,12 @@ import axios from 'axios';
 import Cards from './cards.jsx'
 import {useState,useEffect} from 'react'
 import styled from 'styled-components';
-import fondoHome from '../imgs/marvillas.png'
+
 import Navbar from './navbar.jsx'
 import { useDispatch,useSelector } from 'react-redux'
 import {getData} from '../redux/actions.js'
 import{ useNavigate } from "react-router-dom";
+import maravillas from '../imgs/maravillas.png'
 
 
 
@@ -30,7 +31,7 @@ useEffect(()=>{
 
 
 
-return( <div>
+return( <div >
 	
 
 	<Cards countries={countries} />

@@ -25,7 +25,11 @@ countries.map(country=>names .push(country.name));
 let handleSubmit=(e)=>{
 e.preventDefault();
 if(errors.validate==1){
-axios.post("http://localhost:3001/activities",{ }    ) }
+axios.post("http://localhost:3001/activities",{ nombre:document.getElementById("nombre").value ,
+                                                dificultad:document.getElementById("dificultad").value ,
+                                                duracion:document.getElementById("duracion").value ,
+                                                temporada:document.getElementById("temporada").value ,
+                                                paises:  countriesSelected.join()      }  ) }
 
 };
 

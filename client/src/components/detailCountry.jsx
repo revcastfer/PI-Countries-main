@@ -52,6 +52,12 @@ axios(`http://localhost:3001/countries/${detailID}`)
         <div>subregion</div> <div>	{country.subregion}</div>
          <div>area :</div> <div>	{country.area}</div>
           <div>population :</div> <div>	{country.population}</div>
+          {country.activities?<div> <div>actividades</div> {country.activities.map(actividad=><div>
+          																				<div><div>nombre :</div> <div>{actividad.name}</div></div>
+          																				<div><div>dificultad :</div> <div>{actividad.dificulty}</div></div>
+          																				<div><div>duracion :</div> <div>{actividad.duration}</div></div>
+          																				<div><div>temporada :</div> <div>{actividad.season}</div></div>
+          																				</div>)} </div>:null}
 
    
 
