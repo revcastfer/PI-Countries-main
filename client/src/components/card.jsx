@@ -6,10 +6,10 @@ let CardContainer=styled.div`
 display:flex;
 flex-direction:row;
 align-items: center;
-font-size:25px;
+font-size:20px;
 
 color:white;
-margin:30px
+margin:40px
 `
 
 let descrip={
@@ -22,12 +22,12 @@ height:"100%",
 width:"180px",
 display:"flex",
 flexDirection:"column",
-alignItems:"start",
+alignItems:"center",
 justifyContent:"center" 
   };
 
 let image={
-height:"140px",
+height:"220px",
 
 }
 

@@ -64,7 +64,7 @@ if(islogin){navigate("/Home/countries")}
 		</MsjContainer>
 
 			<span> </span>
-			<Intro  onClick={ ()=>{loginNav();dispatch(getData());} }> <i>comensar...</i> </Intro>
+			<Intro  onClick={ ()=>{loginNav();dispatch(getData());} }><b> <i>comensar...</i> </b> </Intro>
 		</div>)
 
 }
