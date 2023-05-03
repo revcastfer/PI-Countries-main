@@ -18,6 +18,8 @@ width:40%;
 
 
 `
+
+
 let MsjContainer=styled.div`
 position:absolute;
 align-items: start;
@@ -27,10 +29,13 @@ display:flex;
 flex-direction: column;
 font-size: 80px;
 color:white;
-
-
-
 `
+
+
+
+
+
+
 var landing = {
   width: "100vw",
   height: "100vh",
@@ -59,7 +64,7 @@ if(islogin){navigate("/Home/countries")}
 		</MsjContainer>
 
 			<span> </span>
-			<Intro  onClick={ ()=>{loginNav();dispatch(getData());} }> <i>comensar el viaje...</i> </Intro>
+			<Intro  onClick={ ()=>{loginNav();dispatch(getData());} }> <i>comensar...</i> </Intro>
 		</div>)
 
 }

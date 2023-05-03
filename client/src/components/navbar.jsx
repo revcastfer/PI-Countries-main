@@ -27,13 +27,16 @@ function logoutNav(){dispatch(logout());navigate("/") };
 
 let continentFilter=(value)=>{
   dispatch(setPageNumber(0));
-    console.log(value);
+   let filterForContinents=[];
+
     if(value=="All continents")
         {dispatch(setDataFilter(countries))}
-    else{   
-        let continents=[];
-        countries.map(ele=>{if(ele.continent==value){continents.push(ele)}});
-        dispatch( setDataFilter(continents) )}
+    else{ 
+        countries.map(ele=>{if(ele.continent==value){filterForContinents.push(ele) }})
+    };      
+
+        if(filterForContinents.length>1){dispatch( setDataFilter(filterForContinents) )}
+            
 };
 
 

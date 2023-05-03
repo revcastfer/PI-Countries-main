@@ -1,12 +1,15 @@
 import styled from 'styled-components'
 import { NavLink} from "react-router-dom";
 import fondoHome from '../imgs/maravillas.png'
+
 let CardContainer=styled.div`
 display:flex;
 flex-direction:row;
 align-items: center;
 font-size:25px;
+
 color:white;
+margin:30px
 `
 
 let descrip={
@@ -20,21 +23,21 @@ width:"180px",
 display:"flex",
 flexDirection:"column",
 alignItems:"start",
-justifyContent:"center"
+justifyContent:"center" 
+  };
 
- 
-  }
+let image={
+height:"140px",
+
+}
 
 export default function Card(props){
 
 
-
-
-
 	return(
 		<CardContainer>
-		    <div>
-			<img src={props.flag}  alt={`bandera de ${props.name}`}/>
+		    <div style={image}>
+			<img  style={image} src={props.flag}  alt={`bandera de ${props.name}`}/>
 		    </div>
 
 			<div style={descrip}>
