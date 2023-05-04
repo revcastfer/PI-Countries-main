@@ -5,6 +5,7 @@ import{ useNavigate } from "react-router-dom";
 import {login,getData} from '../redux/actions.js'
 import styled from 'styled-components';
 import loginLanding from '../imgs/loginLanding.png'
+import map from '../imgs/map.png'
 
 export default function Landing(){
 

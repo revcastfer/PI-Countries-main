@@ -6,7 +6,7 @@ import Searchbar from './searchBar.jsx'
 import {useState,useEffect} from 'react'
 import Combobox from "react-widgets/Combobox";
 import "react-widgets/styles.css";
-import {} from '../redux/actions.js'
+
 
 
 export default function Navbar(props){

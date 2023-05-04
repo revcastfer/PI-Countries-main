@@ -4,10 +4,10 @@ import {useState,useEffect} from 'react'
 import Select from 'react-select'
 import{ useNavigate,NavLink } from "react-router-dom";
 import axios from 'axios';
+import actividades from '../imgs/actividades.jpg'
+import styled from 'styled-components';
 
 export default function FormActivities(){
-
-
 const selectPaises={width:"350px"} ;   
 const navigate = useNavigate();
 
@@ -16,6 +16,22 @@ let countries=useSelector(state=>state.countries);
 let [namesCountries,setNamecountries]=useState([]);
 let [countriesSelected,setCountriesSelected]=useState([]);
 let [errors,setErrors]=useState({name:"" ,dificultad:"" ,duracion:"" ,temporada:"" ,paises:"",validate:0});
+
+let Container=styled.div`
+display:flex;
+flex-direction:row`;
+
+let ButtonBack=styled.button`
+background-color:yellow;
+height:50px;
+width: 180px;
+font-size:20px;
+border-radius:10px;
+position:absolute;
+top:15px;
+left:80%
+ `; 
+
 
 
 let names=[];
@@ -71,14 +87,27 @@ validate(e)
 
 useEffect(()=>{if(!islogin) {navigate("/")}},[countriesSelected])
 
-	return(
-<div>    
-<form onSubmit={handleSubmit}>
+	return( 
+     
+<div>  
+<NavLink to="/Home"  ><ButtonBack ><b>BACK TO HOME</b></ButtonBack></NavLink>
+
+<Container>
+ <img src={actividades} style={{height:"520px"}} alt="actividades turisticas"/> 
 
 <div>
-<label>nombre :</label> <input id="nombre" onChange={validate} type="text" /><label>{errors.name}</label></div>
+  <div><label>nombre :</label></div>  
+  <div><label>dificultad :</label></div>  
+  <div><label>duracion :</label ></div>
+  <div><label>temporada : </label></div>
+</div>
 
-<div><label>dificultad :</label><select onChange={validate} name="dificultad" id="dificultad">
+
+<form onSubmit={handleSubmit}>
+<div>
+ <input id="nombre" onChange={validate} type="text" /><label>{errors.name}</label></div>
+
+<div><select onChange={validate} name="dificultad" id="dificultad">
                                     <option value="" readOnly hidden>escoja la dificultad</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
@@ -88,8 +117,8 @@ useEffect(()=>{if(!islogin) {navigate("/")}},[countriesSelected])
 </div>
 
 <div>
-<label>duracion :</label ><input id="duracion" onChange={validate} type="time" /><label>{errors.duracion}</label></div>
-<div><label>temporada : </label> <select onChange={validate} name="temporada" id="temporada">
+<input id="duracion" onChange={validate} type="time" /><label>{errors.duracion}</label></div>
+<div> <select onChange={validate} name="temporada" id="temporada">
                                     <option value="" readOnly hidden>escoja la la estacion</option>
                                     <option value="Verano">Verano</option>
                                     <option value="Otoño" >Otoño</option>
@@ -107,8 +136,8 @@ useEffect(()=>{if(!islogin) {navigate("/")}},[countriesSelected])
 
 <button>create</button>
 </form>
+</Container>
 
-<NavLink  to="/Home" ><button>back to Home</button></NavLink>
 
 {countriesSelected.map(ele=><div></div>)}
 

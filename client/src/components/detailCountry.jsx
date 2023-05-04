@@ -4,6 +4,7 @@ import {useEffect,useState} from 'react'
 import { NavLink,useNavigate} from "react-router-dom";
 import axios from 'axios';
 import styled from 'styled-components'
+import map from '../imgs/map.png'
 
 export default function DetailCountry(){
 const navigate=useNavigate();
@@ -25,13 +26,24 @@ let Pie=styled(CountryDetail)`
 border-radius: 25px 25px 0 0;
 `;
 
+let ButtonBack=styled.button`
+background-color:yellow;
+height:50px;
+width: 180px;
+font-size:20px;
+border-radius:10px;
+position:absolute;
+top:15px;
+left:80%
+ `; 
 
 
 let ContainerDetail=styled.div`
 display:flex;
 justify-content:space-around;
 align-items:center ;
-height:90vh;`;
+height:90vh;color:white;
+font-size:40px;`;
 
 
 let [country,setCountry]=useState({ID: "",
@@ -69,21 +81,24 @@ axios(`http://localhost:3001/countries/${detailID}`)
 
 	return(
 <div>
-    <button onClick={HandleClick}>BACK TO HOME</button>
+    <ButtonBack  onClick={HandleClick}><b>BACK TO HOME</b></ButtonBack>
      <ContainerDetail>
          <div>            
-         <img src={country.flag} style={{height:"230px"}}  alt={`bandera de ${country.name}`}/>
-         <NavLink  to={ `https://www.google.com/maps/place/${country.name}` } target="_blank" > <button >VIEW TO MAPS</button></NavLink>
+         <img src={country.flag} style={{height:"230px",border:"solid 1px black"}}  alt={`bandera de ${country.name}`}/>
+         <div>view in maps: <NavLink  to={ `https://www.google.com/maps/place/${country.name}` } target="_blank" >
+          <img src={map} style={{height:"50px"}} alt={`ver en maps`}/>
+         </NavLink>   </div>
+         
          </div>
            
 
          <CountryDetail> <b>            
-               <div>name :   {country.name}</div>    	
-               <div>continent : {country.continent}</div>
-               <div>capital :{country.capital}</div>
-               <div>subregion: 	{country.subregion}</div>
-               <div>area :   {country.area}</div>
-               <div>population :	{country.population}</div>
+               <div>name :   {country.name} </div>    	
+               <div>continent : {country.continent} </div>
+               <div>capital :{country.capital} </div>
+               <div>subregion: 	{country.subregion} </div>
+               <div>area :   {country.area} m<sup>2</sup></div>
+               <div>population :	{country.population} </div>
                 </b> 
           </CountryDetail>
 
