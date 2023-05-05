@@ -19,7 +19,14 @@ let [errors,setErrors]=useState({name:"" ,dificultad:"" ,duracion:"" ,temporada:
 
 let Container=styled.div`
 display:flex;
-flex-direction:row`;
+flex-direction:row;
+font-size:30px;color:white; 
+text-align: right;
+justify-content:space-around;
+height:100vh `;
+
+let ContainerForm=styled(Container)`height:30vh`
+
 
 let ButtonBack=styled.button`
 background-color:yellow;
@@ -32,7 +39,22 @@ top:15px;
 left:80%
  `; 
 
+ let ButtonCreate=styled(ButtonBack)`color:white;position:relative;left:0.5%`
 
+let ContainerCountriesSelected=styled.div`
+background-color:white;
+font-size:15px;
+color:black;
+boder-color:solid 1px black;
+border-radius:10px;
+width:40vw;
+height:30vh;
+display:flex;
+flex-wrap:wrap;
+
+
+
+ `;
 
 let names=[];
 countries.map(country=>names .push(country.name));
@@ -87,25 +109,44 @@ validate(e)
 
 useEffect(()=>{if(!islogin) {navigate("/")}},[countriesSelected])
 
+const coutrySelecDelete={display:"flex",
+                         margin:"15px",
+                         backgroundColor:"gray",
+                         height:"30px",width:"90px",
+                         justifyContent:"space-around",
+                         borderRadius:"5px",
+                         alignItems:"center"
+                     } ;
+
+
+
+
+
 	return( 
      
 <div>  
+
 <NavLink to="/Home"  ><ButtonBack ><b>BACK TO HOME</b></ButtonBack></NavLink>
+<div style={{fontSize:"62px"  }} >create your favorite tourist activity</div>
+
 
 <Container>
- <img src={actividades} style={{height:"520px"}} alt="actividades turisticas"/> 
+ <img src={actividades} style={{width:"47vw",border:"solid 1px black",height:"70vh",borderRadius:"10px"}} alt="actividades turisticas"/> 
 
+<form onSubmit={handleSubmit}>
+<ContainerForm>  
 <div>
-  <div><label>nombre :</label></div>  
-  <div><label>dificultad :</label></div>  
-  <div><label>duracion :</label ></div>
+  <div><label>nombre : </label></div>  
+  <div><label>dificultad : </label></div>  
+  <div><label>duracion : </label ></div>
   <div><label>temporada : </label></div>
 </div>
 
 
-<form onSubmit={handleSubmit}>
 <div>
- <input id="nombre" onChange={validate} type="text" /><label>{errors.name}</label></div>
+<div>
+ <input id="nombre" onChange={validate} type="text" /><label>{errors.name}</label>
+ </div>
 
 <div><select onChange={validate} name="dificultad" id="dificultad">
                                     <option value="" readOnly hidden>escoja la dificultad</option>
@@ -127,25 +168,29 @@ useEffect(()=>{if(!islogin) {navigate("/")}},[countriesSelected])
                                 </select> <label>{errors.temporada}</label>
 </div>
 
-<div>
+</div>
+</ContainerForm>
+  
+<div style={{textAlign:"center"}}>
 <select  name="pais" id="pais" onChange={countryAdd}>
               <option value="" readOnly hidden>escoja sus paises</option>
              {countries.map(ele=><option name={ele.name} value={ele.name}>{ele.name}</option> )}
      </select><label>{errors.paises}</label>
+<div>
+<ButtonCreate>create</ButtonCreate>
+</div>
 </div>
 
-<button>create</button>
+<ContainerCountriesSelected>
+{countriesSelected.map(ele=><div style={coutrySelecDelete}> <div>{ele}</div> <span ><sup onClick={deleteCountry} id={ele}>x</sup></span> </div> )}
+
+</ContainerCountriesSelected>
+
+
 </form>
+
 </Container>
 
-
-{countriesSelected.map(ele=><div></div>)}
-
-
-<div id="containerCountries">
-{countriesSelected.map(ele=><div> <div>{ele}</div><span onClick={deleteCountry} id={ele} >x</span> </div> )}
-
-</div>
 
 </div>)
 }
