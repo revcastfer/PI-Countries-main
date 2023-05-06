@@ -1,21 +1,23 @@
-import Combobox from "react-widgets/Combobox";
-import { useDispatch,useSelector } from 'react-redux'
+
+import { useSelector } from 'react-redux'
 import {useState,useEffect} from 'react'
-import Select from 'react-select'
+
 import{ useNavigate,NavLink } from "react-router-dom";
 import axios from 'axios';
 import actividades from '../imgs/actividades.jpg'
 import styled from 'styled-components';
 
 export default function FormActivities(){
-const selectPaises={width:"350px"} ;   
+ 
 const navigate = useNavigate();
 
 let islogin=useSelector(state=>state.islogin);
 let countries=useSelector(state=>state.countries);
-let [namesCountries,setNamecountries]=useState([]);
+
 let [countriesSelected,setCountriesSelected]=useState([]);
 let [errors,setErrors]=useState({name:"" ,dificultad:"" ,duracion:"" ,temporada:"" ,paises:"",validate:0});
+
+let error={fontSize:"10px",color:"red"}
 
 let Container=styled.div`
 display:flex;
@@ -25,9 +27,9 @@ text-align: right;
 justify-content:space-around;
 height:100vh `;
 
-let ContainerForm=styled(Container)`height:30vh`
+let ContainerForm=styled(Container)`height:30vh;`
 
-
+const letrasNegras={color:"black"};
 let ButtonBack=styled.button`
 background-color:yellow;
 height:50px;
@@ -39,7 +41,11 @@ top:15px;
 left:80%
  `; 
 
- let ButtonCreate=styled(ButtonBack)`color:white;position:relative;left:0.5%`
+ let ButtonCreate=styled(ButtonBack)`
+ color:white;
+ position:relative;
+ left:0.15%;
+ top:0px;margin:5px`
 
 let ContainerCountriesSelected=styled.div`
 background-color:white;
@@ -51,18 +57,25 @@ width:40vw;
 height:30vh;
 display:flex;
 flex-wrap:wrap;
-
-
-
  `;
 
+const coutrySelecDelete={display:"flex",
+                         margin:"10px",
+                         backgroundColor:"gray",
+                         height:"50px",width:"100px",
+                         justifyContent:"space-around",
+                         borderRadius:"5px",
+                         alignItems:"center",
+                         flexWrap:"nowrap"
+                     } ;
+
 let names=[];
-countries.map(country=>names .push(country.name));
+countries.map(country=>names.push(country.name));
 
 
 let handleSubmit=(e)=>{
 e.preventDefault();
-if(errors.validate==1){
+if(errors.validate===1){
 axios.post("http://localhost:3001/activities",{ nombre:document.getElementById("nombre").value ,
                                                 dificultad:document.getElementById("dificultad").value ,
                                                 duracion:document.getElementById("duracion").value ,
@@ -73,8 +86,7 @@ axios.post("http://localhost:3001/activities",{ nombre:document.getElementById("
 
 let deleteCountry=(e)=>{
 let name=e.target.id;
-
-let newCountries=countriesSelected.filter(ele=>ele!=name);
+let newCountries=countriesSelected.filter(ele=>ele!==name);
 setCountriesSelected(newCountries)
 
 }
@@ -86,16 +98,8 @@ let validateDificultad=document.getElementById("dificultad").value;
 let validateDuracion=document.getElementById("duracion").value;
 let validateTemporada=document.getElementById("temporada").value;
 
+console.log(validateName,validateDificultad,validateDuracion,validateTemporada);
 
-if(!validateName){ setErrors({...errors,name:"ingrese nombre"}) } else  { setErrors({...errors,name:""}) };
-if(validateDificultad==""){ setErrors({...errors,dificultad:"ingrese dificultad"}) } else { setErrors({...errors,dificultad:""}) };
-if(validateDuracion==""){ setErrors({...errors,duracion:"ingrese durcion"}) } else { setErrors({...errors,duracion:""}) };
-if(validateTemporada==""){ setErrors({...errors,temporada:"ingrese temporada"}) } else { setErrors({...errors,temporada:""}) };
-if(countriesSelected.length==0){ setErrors({...errors,paises:"ingrese paises"}) } else { setErrors({...errors,paises:""}) };
-
-if(errors.name=="" && errors.dificultad=="" && errors.duracion=="" && errors.temporada=="" && errors.paises=="")
-    {setErrors({...errors,validate:1})} else {setErrors({...errors,validate:0})}
-console.log(countriesSelected);console.log(errors);
 }
 
 
@@ -107,16 +111,9 @@ validate(e)
 
 
 
-useEffect(()=>{if(!islogin) {navigate("/")}},[countriesSelected])
+useEffect(()=>{if(!islogin) {navigate("/")}},[])
 
-const coutrySelecDelete={display:"flex",
-                         margin:"15px",
-                         backgroundColor:"gray",
-                         height:"30px",width:"90px",
-                         justifyContent:"space-around",
-                         borderRadius:"5px",
-                         alignItems:"center"
-                     } ;
+
 
 
 
@@ -127,11 +124,11 @@ const coutrySelecDelete={display:"flex",
 <div>  
 
 <NavLink to="/Home"  ><ButtonBack ><b>BACK TO HOME</b></ButtonBack></NavLink>
-<div style={{fontSize:"62px"  }} >create your favorite tourist activity</div>
+<div style={{fontSize:"60px",display:"flex",color:"#43F94C",padding:"15px"  }} ><i><b>create your favorite tourist activity</b></i></div>
 
 
 <Container>
- <img src={actividades} style={{width:"47vw",border:"solid 1px black",height:"70vh",borderRadius:"10px"}} alt="actividades turisticas"/> 
+ <img src={actividades} style={{width:"40vw",border:"solid 1px black",height:"70vh",borderRadius:"10px"}} alt="actividades turisticas"/> 
 
 <form onSubmit={handleSubmit}>
 <ContainerForm>  
@@ -143,9 +140,9 @@ const coutrySelecDelete={display:"flex",
 </div>
 
 
+<div s>
 <div>
-<div>
- <input id="nombre" onChange={validate} type="text" /><label>{errors.name}</label>
+ <input id="nombre" onChange={validate} type="text" /> <label style={error}>{errors.name}</label>
  </div>
 
 <div><select onChange={validate} name="dificultad" id="dificultad">
@@ -154,7 +151,7 @@ const coutrySelecDelete={display:"flex",
                                     <option value="2">2</option>
                                     <option value="3">3</option>
                                     <option value="4">4</option>
-                                </select> <label>{errors.dificultad}</label>
+                                </select> <label style={error}>{errors.dificultad}</label>
 </div>
 
 <div>
@@ -180,17 +177,19 @@ const coutrySelecDelete={display:"flex",
 <ButtonCreate>create</ButtonCreate>
 </div>
 </div>
-
 <ContainerCountriesSelected>
 {countriesSelected.map(ele=><div style={coutrySelecDelete}> <div>{ele}</div> <span ><sup onClick={deleteCountry} id={ele}>x</sup></span> </div> )}
 
 </ContainerCountriesSelected>
 
 
+
 </form>
+
 
 </Container>
 
 
 </div>)
 }
+
