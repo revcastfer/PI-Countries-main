@@ -6,6 +6,7 @@ import {login,getData} from '../redux/actions.js'
 import styled from 'styled-components';
 import loginLanding from '../imgs/loginLanding.png'
 import map from '../imgs/map.png'
+import BottomLanding from './BottomLanding.jsx'
 
 export default function Landing(){
 
@@ -66,6 +67,7 @@ if(islogin){navigate("/Home/countries")}
 
 			<span> </span>
 			<Intro  onClick={ ()=>{loginNav();dispatch(getData());} }><b> <i>comensar...</i> </b> </Intro>
+			<BottomLanding/>
 		</div>)
 
 }

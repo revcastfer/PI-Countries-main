@@ -34,7 +34,7 @@ useEffect(()=>{
 return( <div >
 	
 
-	<Cards countries={countries} />
+	{countries.length>0?<Cards countries={countries}/>:<div>the countries were not found</div>}
 	 
        
 	</div> )

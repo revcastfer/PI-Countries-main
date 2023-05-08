@@ -17,7 +17,7 @@ const countries = await Country.findAll();
 return countries}
 }
 
-
+ 
 const  getCountriesByID=async(ID)=>{
 
 	const country= await Country.findByPk(ID.toUpperCase(),{include:Activity});

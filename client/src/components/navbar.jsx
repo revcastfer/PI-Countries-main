@@ -40,6 +40,12 @@ let continentFilter=(value)=>{
 };
 
 
+const Combos=styled.div` 
+display:flex;
+justify-content:space-around;
+
+ `;
+
  useEffect(()=>{ 
     islogin?navigate("/Home/countries"):navigate("/")
     let continent=[];
@@ -62,21 +68,33 @@ default: console.log("orden")}
 };
 
 
-
-
-
-
+const combos={height:"38px", width:"22%", padding:"10px"};
+const losOutSyle={display:"flex",justifyContent:"space-around" ,right:"30px",color:"red",fontSize:"25px"}
+const Nombre=styled.div`background: linear-gradient(to bottom, red 0%, orange 50.48%, yellow 100%);
+ border-radius:25px;
+ color:white;
+ width:40% `
 
 	return (<div>
 
-<Combobox data={ [...continents,"All continents"]} onChange={value =>continentFilter(value)} placeholder="Search for a continent" />
-<Combobox data={ ["a-z","z-a"]} onChange={value =>orden(value)} placeholder="Search for order" />
+<Combos>
+<Combobox style={combos} data={ [...continents,"All continents"]} onChange={value =>continentFilter(value)} placeholder="Search for a continent" />
 
-<Combobox  data={[ ]}  placeholder="Search for a type of activity" />
+
+<Combobox style={combos} data={ ["a-z","z-a"]} onChange={value =>orden(value)} placeholder="Search for order" />
+
+
+<Combobox style={combos} data={[ ]}  placeholder="Search for a type of activity" />
+
+
 <Searchbar />
-<NavLink to="/activities" >activities</NavLink>
+</Combos>
 
-<span  onClick={ ()=>{logoutNav()} }> Logout </span>
+<div style={losOutSyle}>
+<NavLink to="/activities" >activities</NavLink>
+<Nombre><b>PI COUNTRIES by Fenando Revilla</b></Nombre>
+<span   onClick={ ()=>{logoutNav()} }> <b><i>Logout</i></b> </span>
+</div>
 <Outlet/>
 
 	 </div> )

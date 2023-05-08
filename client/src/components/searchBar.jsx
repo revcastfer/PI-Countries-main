@@ -19,13 +19,13 @@ let onSearch=(e)=>{
 };
 
 
- 
+
+ const inputSearch={borderRadius:"6px",height:"35px", width:"90%",fontSize:"16px", border:"solid 2px green",margin:"10px"}
 
 
 return(<div>
 
-<label>search</label> 
-<input   onChange={onSearch} type="text" />
+<input placeholder="  search by name" style={inputSearch}  onChange={onSearch} type="text" />
 
 
 </div>	)	
