@@ -2,6 +2,7 @@ import axios from 'axios';
 import Cards from './cards.jsx'
 import {useState,useEffect} from 'react'
 import styled from 'styled-components';
+import NotFound from './NotFound.jsx'
 
 import Navbar from './navbar.jsx'
 import { useDispatch,useSelector } from 'react-redux'
@@ -31,10 +32,10 @@ useEffect(()=>{
 
 
 
-return( <div >
+return( <div style={ {height:"100%"} }>
 	
 
-	{countries.length>0?<Cards countries={countries}/>:<div>the countries were not found</div>}
+	{countries.length>0?<Cards countries={countries}/>:<NotFound/>}
 	 
        
 	</div> )

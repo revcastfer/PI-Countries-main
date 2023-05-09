@@ -19,9 +19,6 @@ const [continents,setContinents]=useState([]);
 const [valueContinent,setValueContinent]=useState([]);
 
 
-const navLogin={display:islogin?"block":"none"}
-const Login={display:islogin?"none":"block"}
-
 
 function logoutNav(){dispatch(logout());navigate("/") };
 
