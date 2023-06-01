@@ -29,7 +29,7 @@ const  getCountriesByID=async(ID)=>{
 
 const postActivityController=async(nombre,dificultad,duracion,temporada,paises)=>{
 
-	
+
 
 
 let newActivity=await Activity.create({name:nombre,dificulty:dificultad,duration:duracion,season:temporada});

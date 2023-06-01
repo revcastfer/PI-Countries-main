@@ -105,15 +105,18 @@ axios(`http://localhost:3001/countries/${detailID}`)
          </ContainerDetail>  
 
          <Pie>
-         	{country.activities.length>0?<div> 
-                                   <div>actividades</div> 
-                                    {country.activities.map(actividad=>
-                                    	               <div>
-      	                                               <div><div>nombre :</div> <div>{actividad.name}</div></div>
-          																		         <div><div>dificultad :</div> <div>{actividad.dificulty}</div></div>
-          																		         <div><div>duracion :</div> <div>{actividad.duration}</div></div>
-          																		         <div><div>temporada :</div> <div>{actividad.season}</div></div></div>)} 
-                                                     </div>:<div>sin actividades</div>}
+         	{country.activities.length>0?<div>
+                                             <div><b>ACTIVIDADES</b></div> 
+                                                {country.activities.map(actividad=>
+                                    	           <div>
+      	                                             <div >nombre : {actividad.name}</div>
+          									         <div>dificultad : {actividad.dificulty}</div>
+          									        <div>duracion : {actividad.duration}</div>
+          									        <div>temporada : {actividad.season}</div>
+                                                    </div>) }
+                                                    </div>:<div>sin actividades</div>}
+
+                                                    
          </Pie>    
 </div>
 		)

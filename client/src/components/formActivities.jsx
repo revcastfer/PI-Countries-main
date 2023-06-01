@@ -14,10 +14,12 @@ const navigate = useNavigate();
 let islogin=useSelector(state=>state.islogin);
 let countries=useSelector(state=>state.countries);
 
-let [countriesSelected,setCountriesSelected]=useState([]);
-let [errors,setErrors]=useState({name:"" ,dificultad:"" ,duracion:"" ,temporada:"" ,paises:"",validate:0});
 
-let error={fontSize:"10px",color:"red"}
+let ready={nombre:false,dificultad:false,duracion:false};
+let [countriesSelected,setCountriesSelected]=useState([]);
+
+
+let error={fontSize:"16px",color:"red",visibility:"hidden"}
 
 let Container=styled.div`
 display:flex;
@@ -72,41 +74,36 @@ const coutrySelecDelete={display:"flex",
 let names=[];
 countries.map(country=>names.push(country.name));
 
-
-let handleSubmit=(e)=>{
-e.preventDefault();
-if(errors.validate===1){
-axios.post("http://localhost:3001/activities",{ nombre:document.getElementById("nombre").value ,
-                                                dificultad:document.getElementById("dificultad").value ,
-                                                duracion:document.getElementById("duracion").value ,
-                                                temporada:document.getElementById("temporada").value ,
-                                                paises:  countriesSelected.join()      }  ) }
-
-};
-
 let deleteCountry=(e)=>{
 let name=e.target.id;
 let newCountries=countriesSelected.filter(ele=>ele!==name);
 setCountriesSelected(newCountries)
-
 }
 
+let changeVisibleError=(name,valor)=>{ document.getElementById(name+"Error").style.visibility=valor };
 
 let validate=(e)=>{
-let validateName=document.getElementById("nombre").value;
-let validateDificultad=document.getElementById("dificultad").value;
-let validateDuracion=document.getElementById("duracion").value;
-let validateTemporada=document.getElementById("temporada").value;
 
-console.log(validateName,validateDificultad,validateDuracion,validateTemporada);
+let valiNumber=new RegExp("[0-9]");
+let validateNumber;
+e.target.id!=="nombre"?validateNumber=false:validateNumber=valiNumber.test(e.target.value);
 
-}
+if(e.target.value==""||validateNumber){changeVisibleError(e.target.id,"visible");ready[e.target.id]=false }
+else {changeVisibleError(e.target.id,"hidden");ready[e.target.id]=true }
+};
 
+
+ let validatePaises=()=>{if(countriesSelected==""){alert("agregar paises");return false }
+else{return true}
+ };
+
+
+ let readyForSend=()=>{if(ready.nombre&&ready.dificultad&&ready.duracion){return true}else{ alert("verificar datos");return false} };
 
 let countryAdd=(e)=>{
 let ele=e.target.value;
 if(!countriesSelected.includes(ele)) {setCountriesSelected([...countriesSelected,ele]);}
-validate(e)
+
 };
 
 
@@ -115,7 +112,21 @@ useEffect(()=>{if(!islogin) {navigate("/")}},[])
 
 
 
+let handleSubmit=(e)=>{
+e.preventDefault();
 
+if( validatePaises()&&readyForSend()){
+
+axios.post("http://localhost:3001/activities",{ nombre:document.getElementById("nombre").value ,
+                                                dificultad:document.getElementById("dificultad").value ,
+                                                duracion:document.getElementById("duracion").value ,
+                                                temporada:document.getElementById("temporada").value ,
+                                                paises:  countriesSelected.join()      }  ) 
+alert("activity created");
+}
+
+
+};
 
 
 
@@ -134,15 +145,15 @@ useEffect(()=>{if(!islogin) {navigate("/")}},[])
 <ContainerForm>  
 <div>
   <div><label>nombre : </label></div>  
-  <div><label>dificultad : </label></div>  
-  <div><label>duracion : </label ></div>
-  <div><label>temporada : </label></div>
+  <div><label >dificultad : </label></div>  
+  <div><label >duracion : </label ></div>
+  <div><label >temporada : </label></div>
 </div>
 
 
-<div s>
 <div>
- <input id="nombre" onChange={validate} type="text" /> <label style={error}>{errors.name}</label>
+<div>
+ <input id="nombre" onChange={validate} type="text" /> <label id="nombreError" style={error}>verificar nombre</label>
  </div>
 
 <div><select onChange={validate} name="dificultad" id="dificultad">
@@ -151,33 +162,35 @@ useEffect(()=>{if(!islogin) {navigate("/")}},[])
                                     <option value="2">2</option>
                                     <option value="3">3</option>
                                     <option value="4">4</option>
-                                </select> <label style={error}>{errors.dificultad}</label>
+                                </select> <label id="dificultadError" style={error}>escoger dificultad</label>
 </div>
 
 <div>
-<input id="duracion" onChange={validate} type="time" /><label>{errors.duracion}</label></div>
-<div> <select onChange={validate} name="temporada" id="temporada">
+<input id="duracion" onChange={validate} type="time" /><label id="duracionError"style={error}>verificar duracion</label></div>
+<div> <select onChange={validate}  id="temporada">
                                     <option value="" readOnly hidden>escoja la la estacion</option>
                                     <option value="Verano">Verano</option>
                                     <option value="Otoño" >Otoño</option>
                                     <option value="Invierno">Invierno</option>
                                     <option value="Primavera">Primavera</option>
-                                </select> <label>{errors.temporada}</label>
+                                </select> <label id="temporadaError" style={error}>verificar temporada</label>
 </div>
+
+
 
 </div>
 </ContainerForm>
   
 <div style={{textAlign:"center"}}>
-<select  name="pais" id="pais" onChange={countryAdd}>
+<select   id="pais" onChange={countryAdd}>
               <option value="" readOnly hidden>escoja sus paises</option>
              {countries.map(ele=><option name={ele.name} value={ele.name}>{ele.name}</option> )}
-     </select><label>{errors.paises}</label>
+     </select>
 <div>
 <ButtonCreate>create</ButtonCreate>
 </div>
 </div>
-<ContainerCountriesSelected>
+<ContainerCountriesSelected id="paises">
 {countriesSelected.map(ele=><div style={coutrySelecDelete}> <div>{ele}</div> <span ><sup onClick={deleteCountry} id={ele}>x</sup></span> </div> )}
 
 </ContainerCountriesSelected>

@@ -15,10 +15,11 @@ import maravillas from '../imgs/maravillas.png'
 
 
 export default function  Home(){	
-let countries=useSelector(state=>state.countriesFilter);
-	
+
+let countries=useSelector(state=>state.countriesFilter);	
 const navigate = useNavigate();
 const dispatch = useDispatch();
+
 
 let islogin=useSelector(state=>state.islogin);
 
@@ -26,7 +27,7 @@ let islogin=useSelector(state=>state.islogin);
 
 useEffect(()=>{
 	if(!islogin) {navigate("/")}
-},[countries] )
+},[countries])
 
 
 
