@@ -41,7 +41,7 @@ export default function Card(props){
 		    </div>
 
 			<div style={descrip}>
-			<div><b>name: </b></div><NavLink  to={props.ID} ><span>{props.name}</span></NavLink>
+			<div><b>name: </b></div><NavLink style={{textDecoration:"none",color:"green",fontSize:"30px"}} to={props.ID} ><span><b>{props.name}</b></span></NavLink>
 			<div><b>continent: </b></div><span>{props.continent}</span>
 			</div>
 		</CardContainer> 

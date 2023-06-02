@@ -88,9 +88,9 @@ const Nombre=styled.div`background: linear-gradient(to bottom, red 0%, orange 50
 </Combos>
 
 <div style={losOutSyle}>
-<NavLink to="/activities" >activities</NavLink>
+<NavLink to="/activities" style={{fontSize:"36px",textDecoration:"none",color:"orange"}} ><b>activities</b></NavLink>
 <Nombre><b>PI COUNTRIES by Fenando Revilla</b></Nombre>
-<span   onClick={ ()=>{logoutNav()} }> <b><i>Logout</i></b> </span>
+<span   onClick={ ()=>{logoutNav()} }> <b><i style={{cursor: 'pointer'}}>logout</i></b> </span>
 </div>
 <Outlet/>
 

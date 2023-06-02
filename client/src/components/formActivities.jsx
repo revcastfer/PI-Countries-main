@@ -7,19 +7,6 @@ import axios from 'axios';
 import actividades from '../imgs/actividades.jpg'
 import styled from 'styled-components';
 
-export default function FormActivities(){
- 
-const navigate = useNavigate();
-
-let islogin=useSelector(state=>state.islogin);
-let countries=useSelector(state=>state.countries);
-
-
-let ready={nombre:false,dificultad:false,duracion:false};
-let [countriesSelected,setCountriesSelected]=useState([]);
-
-
-let error={fontSize:"16px",color:"red",visibility:"hidden"}
 
 let Container=styled.div`
 display:flex;
@@ -61,7 +48,11 @@ display:flex;
 flex-wrap:wrap;
  `;
 
-const coutrySelecDelete={display:"flex",
+
+
+
+export default function FormActivities(){
+  const coutrySelecDelete={display:"flex",
                          margin:"10px",
                          backgroundColor:"gray",
                          height:"50px",width:"100px",
@@ -71,13 +62,24 @@ const coutrySelecDelete={display:"flex",
                          flexWrap:"nowrap"
                      } ;
 
+let error={fontSize:"16px",color:"red",visibility:"hidden"}
+ 
+const navigate = useNavigate();
+
+let islogin=useSelector(state=>state.islogin);
+let countries=useSelector(state=>state.countries);
+
+
+let ready={nombre:false,dificultad:false,duracion:false};
+let [dataForSubmint,setDataForSubmint]=useState({nombre:"",dificultad:"",duracion:"",temporada:"",countriesSelected:[]});
+
 let names=[];
 countries.map(country=>names.push(country.name));
 
 let deleteCountry=(e)=>{
 let name=e.target.id;
-let newCountries=countriesSelected.filter(ele=>ele!==name);
-setCountriesSelected(newCountries)
+let newCountries=dataForSubmint.countriesSelected.filter(ele=>ele!==name);
+setDataForSubmint({...dataForSubmint,countriesSelected:newCountries})
 }
 
 let changeVisibleError=(name,valor)=>{ document.getElementById(name+"Error").style.visibility=valor };
@@ -90,10 +92,13 @@ e.target.id!=="nombre"?validateNumber=false:validateNumber=valiNumber.test(e.tar
 
 if(e.target.value==""||validateNumber){changeVisibleError(e.target.id,"visible");ready[e.target.id]=false }
 else {changeVisibleError(e.target.id,"hidden");ready[e.target.id]=true }
+
+setDataForSubmint({...dataForSubmint,[e.target.id]:e.target.value});
+console.log(dataForSubmint)
 };
 
 
- let validatePaises=()=>{if(countriesSelected==""){alert("agregar paises");return false }
+ let validatePaises=()=>{if(dataForSubmint.countriesSelected==""){alert("agregar paises");return false }
 else{return true}
  };
 
@@ -102,7 +107,7 @@ else{return true}
 
 let countryAdd=(e)=>{
 let ele=e.target.value;
-if(!countriesSelected.includes(ele)) {setCountriesSelected([...countriesSelected,ele]);}
+if(!dataForSubmint.countriesSelected.includes(ele)) {setDataForSubmint({...dataForSubmint,countriesSelected:[...dataForSubmint.countriesSelected,ele]});}
 
 };
 
@@ -117,11 +122,11 @@ e.preventDefault();
 
 if( validatePaises()&&readyForSend()){
 
-axios.post("http://localhost:3001/activities",{ nombre:document.getElementById("nombre").value ,
-                                                dificultad:document.getElementById("dificultad").value ,
-                                                duracion:document.getElementById("duracion").value ,
-                                                temporada:document.getElementById("temporada").value ,
-                                                paises:  countriesSelected.join()      }  ) 
+axios.post("http://localhost:3001/activities",{ nombre:dataForSubmint.nombre ,
+                                                dificultad:dataForSubmint.dificultad ,
+                                                duracion:dataForSubmint.duracion,
+                                                temporada:dataForSubmint.temporada ,
+                                                paises:  dataForSubmint.countriesSelected.join()      }  ) 
 alert("activity created");
 }
 
@@ -153,10 +158,10 @@ alert("activity created");
 
 <div>
 <div>
- <input id="nombre" onChange={validate} type="text" /> <label id="nombreError" style={error}>verificar nombre</label>
+ <input id="nombre" onChange={validate} value={dataForSubmint.nombre} type="text" /> <label id="nombreError" style={error}>verificar nombre</label>
  </div>
 
-<div><select onChange={validate} name="dificultad" id="dificultad">
+<div><select onChange={validate} value={dataForSubmint.dificultad} name="dificultad" id="dificultad">
                                     <option value="" readOnly hidden>escoja la dificultad</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
@@ -166,7 +171,7 @@ alert("activity created");
 </div>
 
 <div>
-<input id="duracion" onChange={validate} type="time" /><label id="duracionError"style={error}>verificar duracion</label></div>
+<input id="duracion" value={dataForSubmint.duracion} onChange={validate} type="time" /><label id="duracionError"style={error}>verificar duracion</label></div>
 <div> <select onChange={validate}  id="temporada">
                                     <option value="" readOnly hidden>escoja la la estacion</option>
                                     <option value="Verano">Verano</option>
@@ -191,7 +196,7 @@ alert("activity created");
 </div>
 </div>
 <ContainerCountriesSelected id="paises">
-{countriesSelected.map(ele=><div style={coutrySelecDelete}> <div>{ele}</div> <span ><sup onClick={deleteCountry} id={ele}>x</sup></span> </div> )}
+{dataForSubmint.countriesSelected.map(ele=><div style={coutrySelecDelete}> <div>{ele}</div> <span ><sup onClick={deleteCountry} id={ele}>x</sup></span> </div> )}
 
 </ContainerCountriesSelected>
 
