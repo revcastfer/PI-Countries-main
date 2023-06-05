@@ -27,9 +27,9 @@ let islogin=useSelector(state=>state.islogin);
 
 useEffect(()=>{
 	if(!islogin) {navigate("/")}
-},[countries])
+},[])
 
-
+ 
 
 
 

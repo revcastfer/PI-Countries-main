@@ -14,7 +14,7 @@ const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}
 const basename = path.basename(__filename);
 
 const modelDefiners = [];
-
+ 
 // Leemos todos los archivos de la carpeta Models, los requerimos y agregamos al arreglo modelDefiners
 fs.readdirSync(path.join(__dirname, '/models'))
   .filter((file) => (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js'))
@@ -38,6 +38,7 @@ const { Country, Activity} = sequelize.models;
 Country.belongsToMany(Activity, { through: "activityCountry" });
 Activity.belongsToMany(Country, { through: "activityCountry" });
 
+
 async function getDataApi() {
   try {
     let response = await axios.get('https://restcountries.com/v3/all');
@@ -60,11 +61,8 @@ await Country.bulkCreate(dataforBulk)}
 catch (error) {console.error(error)}
 }
 
+
 getDataApi();
-
-
-
-
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
