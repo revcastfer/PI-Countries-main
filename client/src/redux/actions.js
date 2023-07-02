@@ -26,3 +26,7 @@ export function a_to_z(){
 
 export function z_to_a(){
       return{type:'Z_A'}};
+
+export function continent(continent){
+      return {type:'SET_CONTINENT',payload:continent}
+}

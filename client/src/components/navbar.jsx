@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { useDispatch,useSelector } from 'react-redux'
 import { NavLink,Outlet, useNavigate } from "react-router-dom";
-import {logout,a_to_z,z_to_a,setDataFilter,setPageNumber} from '../redux/actions.js'
+import {logout,a_to_z,z_to_a,setDataFilter,setPageNumber,continent} from '../redux/actions.js'
 import Searchbar from './searchBar.jsx'
 import {useState,useEffect} from 'react'
 import Combobox from "react-widgets/Combobox";
@@ -38,10 +38,13 @@ function logoutNav(){dispatch(logout());navigate("/") };
 
 let continentFilter=(value)=>{
    dispatch(setPageNumber(0));
+ 
    let filterForContinents=[];
 
     if(value==="All continents"){dispatch(setDataFilter(countries))}
-    else{ countries.forEach(ele=>{if(ele.continent===value){filterForContinents.push(ele)}}) };      
+    else{
+        dispatch(continent(value));
+     countries.forEach(ele=>{if(ele.continent===value){filterForContinents.push(ele)}}) };      
 
     if(filterForContinents.length>1){dispatch( setDataFilter(filterForContinents) )}            
 };
