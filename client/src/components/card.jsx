@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { NavLink} from "react-router-dom";
-import fondoHome from '../imgs/maravillas.png'
+
 
 let CardContainer=styled.div`
 display:flex;

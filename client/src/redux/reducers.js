@@ -14,11 +14,11 @@ const countriesReducer=(state=initialState,action)=>{
 		return {...state,islogin:false}
 
     case 'A_Z':
-   	let dataA= state.countries.sort((x, y) => x.name.localeCompare(y.name))
+   	let dataA= state.countriesFilter.sort((x, y) => x.name.localeCompare(y.name))
 		return {...state,countriesFilter:dataA}
 
 	case 'Z_A':
-	let dataZ= state.countries.sort((x, y) => y.name.localeCompare(x.name))
+	let dataZ= state.countriesFilter.sort((x, y) => y.name.localeCompare(x.name))
 		return {...state,countriesFilter:dataZ}
 
 	case 'SET_DATA_FILTER':

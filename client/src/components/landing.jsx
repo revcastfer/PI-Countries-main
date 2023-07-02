@@ -5,10 +5,9 @@ import{ useNavigate } from "react-router-dom";
 import {login,getData} from '../redux/actions.js'
 import styled from 'styled-components';
 import loginLanding from '../imgs/loginLanding.png'
-import map from '../imgs/map.png'
 import BottomLanding from './BottomLanding.jsx'
 
-export default function Landing(){
+
 
 let Intro=styled.button`
 font-size:45px;
@@ -33,17 +32,16 @@ font-size: 80px;
 color:white;
 `
 
-
-
-
-
-
 var landing = {
   width: "100vw",
   height: "100vh",
   backgroundImage: `url(${loginLanding})`,
   backgroundSize: "cover"
 };
+
+
+export default function Landing(){
+
 
 let islogin=useSelector(state=>state.islogin);
 const dispatch = useDispatch();
@@ -55,7 +53,7 @@ function loginNav(){dispatch(login());navigate("/Home/countries") };
 useEffect(()=>{
 if(islogin){navigate("/Home/countries")}
 
-},[])
+},[islogin,navigate])
 	return(
 
 		<div style={landing}>

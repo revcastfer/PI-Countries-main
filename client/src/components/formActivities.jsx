@@ -18,7 +18,7 @@ height:100vh `;
 
 let ContainerForm=styled(Container)`height:30vh;`
 
-const letrasNegras={color:"black"};
+
 let ButtonBack=styled.button`
 background-color:yellow;
 height:50px;
@@ -90,7 +90,7 @@ let valiNumber=new RegExp("[0-9]");
 let validateNumber;
 e.target.id!=="nombre"?validateNumber=false:validateNumber=valiNumber.test(e.target.value);
 
-if(e.target.value==""||validateNumber){changeVisibleError(e.target.id,"visible");ready[e.target.id]=false }
+if(e.target.value===""||validateNumber){changeVisibleError(e.target.id,"visible");ready[e.target.id]=false }
 else {changeVisibleError(e.target.id,"hidden");ready[e.target.id]=true }
 
 setDataForSubmint({...dataForSubmint,[e.target.id]:e.target.value});
@@ -98,7 +98,7 @@ console.log(dataForSubmint)
 };
 
 
- let validatePaises=()=>{if(dataForSubmint.countriesSelected==""){alert("agregar paises");return false }
+ let validatePaises=()=>{if(dataForSubmint.countriesSelected===""){alert("agregar paises");return false }
 else{return true}
  };
 
@@ -113,7 +113,7 @@ if(!dataForSubmint.countriesSelected.includes(ele)) {setDataForSubmint({...dataF
 
 
 
-useEffect(()=>{if(!islogin) {navigate("/")}},[])
+useEffect(()=>{if(!islogin) {navigate("/")}},[islogin,navigate]);
 
 
 

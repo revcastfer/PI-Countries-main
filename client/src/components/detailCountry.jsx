@@ -1,14 +1,11 @@
 import { useParams } from 'react-router-dom'
-import { useSelector } from 'react-redux'
 import {useEffect,useState} from 'react'
 import { NavLink,useNavigate} from "react-router-dom";
 import axios from 'axios';
 import styled from 'styled-components'
 import map from '../imgs/map.png'
 
-export default function DetailCountry(){
-const navigate=useNavigate();
-let {detailID}=useParams();
+
 
 let CountryDetail=styled.div`
 display:flex;
@@ -46,6 +43,14 @@ height:90vh;color:white;
 font-size:40px;`;
 
 
+
+export default function DetailCountry(){
+const navigate=useNavigate();
+let {detailID}=useParams();
+
+
+
+
 let [country,setCountry]=useState({ID: "",
 	                                 name: "",
 	                                 flag: "",
@@ -75,7 +80,7 @@ axios(`http://localhost:3001/countries/${detailID}`)
 
 
 
-},[])
+},[detailID])
 
 
 

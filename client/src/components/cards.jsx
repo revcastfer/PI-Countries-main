@@ -3,8 +3,15 @@ import ReactPaginate from "react-paginate";
 import styled from 'styled-components';
 import "./pagination.css"
 import { useDispatch,useSelector } from 'react-redux'
-import {useState,useEffect} from 'react'
 import {setPageNumber} from '../redux/actions.js'
+
+
+let CardsContainer=styled.div`
+display: flex;
+flex-wrap:wrap;
+justify-content: space-around;
+align-content: space-around;
+` 
 
 
 
@@ -19,14 +26,7 @@ let pagesVisited=pageNumber*countryPerPage;
 
 let displayCountry =countries.slice(pagesVisited,pagesVisited+countryPerPage);
 
-let CardsContainer=styled.div`
-display: flex;
-flex-wrap:wrap;
-justify-content: space-around;
-align-content: space-around;
 
-
-` 
 
 
 return(

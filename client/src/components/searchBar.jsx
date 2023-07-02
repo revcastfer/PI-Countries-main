@@ -10,7 +10,7 @@ let data =useSelector(state=>state.countries);
 
 let onSearch=(e)=>{
 
-	if(!e.target.value==""){
+	if(!e.target.value===""){
 	dispatch(setPageNumber(0));
 	let filter=[];
 	data.map(countryFilter=>countryFilter.name.toLowerCase().includes(e.target.value.toLowerCase())?filter.push(countryFilter):null);
